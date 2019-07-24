@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setBoard } from "../redux/modules/board";
+import { setBoard } from "../redux/modules/game";
 import { KEY_ENTER, DEFAULT_BOARD_SIZE } from "../constants";
 
 class BoardSetup extends Component {

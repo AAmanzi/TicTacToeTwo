@@ -1,27 +1,39 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import styled from "styled-components";
 import BoardSetup from "./BoardSetup";
+import { TILE_SIZE } from "../constants";
+import Tile from "./Tile";
 
-const Board = props => {
-  const { board, boardSize } = props;
+class Board extends Component {
+  render() {
+    const { board, boardSize } = this.props;
 
-  if (boardSize === 0) {
-    return <BoardSetup />;
+    const TileContainer = styled.div`
+      display: flex;
+      flex-wrap: wrap;
+      max-width: ${boardSize * TILE_SIZE}px;
+    `;
+
+    if (boardSize === 0) {
+      return <BoardSetup />;
+    }
+
+    return (
+      <div>
+        <TileContainer>
+          {board.map((el, index) => (
+            <Tile key={index} index={index} label={el} />
+          ))}
+        </TileContainer>
+      </div>
+    );
   }
-
-  return (
-    <div>
-      {board.map((el, index) => (
-        <div key={index}>{el}</div>
-      ))}
-    </div>
-  );
-};
+}
 
 const mapStateToProps = state => {
   return {
-    ...state.board
+    ...state.game
   };
 };
 
