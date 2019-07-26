@@ -65,17 +65,32 @@ export const getNewPlayerTileCount = (
     newTileCount.antiDiag += 1;
   }
 
-  console.log(playerTileCount);
-
   return playerTileCount;
 };
 
 export const isWinner = (player, boardSize) => {
-  console.log(player, boardSize);
   return (
     player.row.find(tileCount => tileCount === boardSize) !== undefined ||
     player.column.find(tileCount => tileCount === boardSize) !== undefined ||
     player.diag === boardSize ||
     player.antiDiag === boardSize
   );
+};
+
+export const updateScore = (winner, board, score) => {
+  const newScore = { ...score };
+
+  if (winner === 0) {
+    newScore.o += 1;
+  }
+
+  if (winner === 1) {
+    newScore.x += 1;
+  }
+
+  if (winner === null && !board.includes("")) {
+    newScore.draw += 1;
+  }
+
+  return newScore;
 };

@@ -15,18 +15,25 @@ class Board extends Component {
       max-width: ${boardSize * TILE_SIZE}px;
     `;
 
+    const BoardContainer = styled.div`
+      width: 60%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    `;
+
     if (boardSize === 0) {
       return <BoardSetup />;
     }
 
     return (
-      <div>
+      <BoardContainer>
         <TileContainer>
           {board.map((el, index) => (
             <Tile key={index} index={index} label={el} />
           ))}
         </TileContainer>
-      </div>
+      </BoardContainer>
     );
   }
 }
@@ -37,6 +44,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps
-)(Board);
+export default connect(mapStateToProps)(Board);

@@ -5,6 +5,7 @@ const SET_BOARD = "SET_BOARD";
 const HANDLE_TURN = "HANDLE_TURN";
 const NEXT_PLAYER = "NEXT_PLAYER";
 const GET_WINNER = "GET_WINNER";
+const UPDATE_SCORE = "UPDATE_SCORE";
 const UPDATE_PLAYER_TILE_COUNT = "UPDATE_PLAYER_TILE_COUNT";
 const GENERATE_PLAYER_TILE_COUNT = "GENERATE_PLAYER_TILE_COUNT";
 
@@ -14,7 +15,12 @@ const initialState = {
   boardSize: 0,
   currentPlayer: utils.getFirstPlayer(),
   winner: null,
-  playerTileCount: null
+  playerTileCount: null,
+  score: {
+    o: 0,
+    x: 0,
+    draw: 0
+  }
 };
 
 // action creators
@@ -46,6 +52,10 @@ export const handleTurn = tileIndex => dispatch => {
 
   dispatch({
     type: GET_WINNER
+  });
+
+  dispatch({
+    type: UPDATE_SCORE
   });
 
   return dispatch({
@@ -101,6 +111,11 @@ const reducer = (state = initialState, action) => {
         )
           ? state.currentPlayer
           : null
+      };
+    case UPDATE_SCORE:
+      return {
+        ...state,
+        score: utils.updateScore(state.winner, state.board, state.score)
       };
     default:
       return state;
