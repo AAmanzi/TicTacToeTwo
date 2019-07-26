@@ -7,8 +7,9 @@ import { TILE_SIZE } from "../constants";
 
 class Tile extends Component {
   handleClick = () => {
-    if(this.props.label === "")
-    this.props.handleTurn(this.props.index);
+    if (this.props.label === "" && this.props.winner === null) {
+      this.props.handleTurn(this.props.index);
+    }
   };
 
   render() {
@@ -27,11 +28,17 @@ Tile.propTypes = {
   label: PropTypes.string
 };
 
+const mapStateToProps = state => {
+  return {
+    winner: state.game.winner
+  };
+};
+
 const mapDispatchToProps = {
   handleTurn
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Tile);

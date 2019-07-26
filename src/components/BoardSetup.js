@@ -29,15 +29,18 @@ class BoardSetup extends Component {
   render() {
     return (
       <div>
-        <input
-          autoFocus
-          type="number"
-          min="3"
-          max="6"
-          onChange={this.handleInputChange}
-          onKeyPress={this.setBoardIfEnter}
-          value={this.state.boardSize}
-        />
+        <label>
+          Choose the size of the board:
+          <input
+            autoFocus
+            type="number"
+            min="3"
+            max="6"
+            onChange={this.handleInputChange}
+            onKeyPress={this.setBoardIfEnter}
+            value={this.state.boardSize}
+          />
+        </label>
         <button onClick={this.handleSetBoard}>Start</button>
       </div>
     );

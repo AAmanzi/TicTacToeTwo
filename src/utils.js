@@ -16,25 +16,29 @@ export const handleSetBoard = boardSize => {
 };
 
 export const generatePlayerTileCount = boardSize => {
-  return [
+  const array = new Array(boardSize).fill(0);
+
+  const test = [
     {
-      row: new Array(boardSize).fill(0),
-      column: new Array(boardSize).fill(0),
+      row: [...array],
+      column: [...array],
       diag: 0,
       antiDiag: 0
     },
     {
-      row: new Array(boardSize).fill(0),
-      column: new Array(boardSize).fill(0),
+      row: [...array],
+      column: [...array],
       diag: 0,
       antiDiag: 0
     }
   ];
+
+  return test;
 };
 
 export const handleTurn = (board, currentPlayer, tileIndex) => {
   const newBoard = [...board];
-  newBoard[tileIndex] = currentPlayer === 0 ? PLAYER_X : PLAYER_O;
+  newBoard[tileIndex] = currentPlayer === 0 ? PLAYER_O : PLAYER_X;
   return newBoard;
 };
 
@@ -49,8 +53,8 @@ export const getNewPlayerTileCount = (
   tileIndex
 ) => {
   const newTileCount = playerTileCount[currentPlayer];
-  const row = tileIndex % 3;
-  const column = Math.floor(tileIndex / 3);
+  const row = tileIndex % boardSize;
+  const column = Math.floor(tileIndex / boardSize);
 
   newTileCount.row[row] += 1;
   newTileCount.column[column] += 1;
@@ -60,13 +64,17 @@ export const getNewPlayerTileCount = (
   if (row + column === boardSize - 1) {
     newTileCount.antiDiag += 1;
   }
+
+  console.log(playerTileCount);
+
   return playerTileCount;
 };
 
 export const isWinner = (player, boardSize) => {
+  console.log(player, boardSize);
   return (
-    player.row.some(tileCount => tileCount === boardSize) ||
-    player.column.some(tileCount => tileCount === boardSize) ||
+    player.row.find(tileCount => tileCount === boardSize) !== undefined ||
+    player.column.find(tileCount => tileCount === boardSize) !== undefined ||
     player.diag === boardSize ||
     player.antiDiag === boardSize
   );

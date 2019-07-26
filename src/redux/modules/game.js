@@ -19,7 +19,7 @@ const initialState = {
 
 // action creators
 export const setBoard = boardSize => dispatch => {
-  if (boardSize < 3 || boardSize > 6) {
+  if ((boardSize < 3 || boardSize > 6) && boardSize !== 0) {
     return;
   }
 
@@ -60,7 +60,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         board: action.payload.board,
-        boardSize: action.payload.boardSize
+        boardSize: parseInt(action.payload.boardSize),
+        winner: null
       };
     case GENERATE_PLAYER_TILE_COUNT:
       return {
