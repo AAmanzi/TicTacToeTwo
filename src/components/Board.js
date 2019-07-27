@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import BoardSetup from "./BoardSetup";
 import { TILE_SIZE } from "../constants";
 import Tile from "./Tile";
 
@@ -16,15 +15,13 @@ class Board extends Component {
     `;
 
     const BoardContainer = styled.div`
-      width: 60%;
+      width: 100%;
+      padding: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: #376d66;
     `;
-
-    if (boardSize === 0) {
-      return <BoardSetup />;
-    }
 
     return (
       <BoardContainer>

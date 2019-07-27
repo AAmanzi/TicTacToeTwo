@@ -7,23 +7,26 @@ import { setBoard } from "../redux/modules/game";
 
 const GameEndDisplay = props => {
   const EndDisplay = styled.div`
-    width: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
   `;
 
+  const Span = styled.span`
+    font-size: 48px;
+    font-weight: bolder;
+    margin: 5px;
+    padding: 5px;
+    color: #fb5a4a;
+  `;
+
   return (
     <EndDisplay>
       {props.winner !== null ? (
-        <span>{props.winner === 0 ? PLAYER_O : PLAYER_X} has won!</span>
+        <Span>{props.winner === 0 ? PLAYER_O : PLAYER_X} HAS WON!</Span>
       ) : (
-        <span>The game is a draw!</span>
+        <Span>DRAW!</Span>
       )}
-      <button onClick={() => props.setBoard(props.boardSize)}>
-        Play again
-      </button>
-      <button onClick={() => props.setBoard(0)}>Change board size</button>
     </EndDisplay>
   );
 };

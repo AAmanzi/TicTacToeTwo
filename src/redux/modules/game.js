@@ -25,7 +25,7 @@ const initialState = {
 
 // action creators
 export const setBoard = boardSize => dispatch => {
-  if ((boardSize < 3 || boardSize > 6) && boardSize !== 0) {
+  if ((boardSize < 3 || boardSize > 6)) {
     return;
   }
 
