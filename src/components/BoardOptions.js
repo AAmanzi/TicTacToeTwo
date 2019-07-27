@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { setBoard } from "../redux/modules/game";
-import { KEY_ENTER } from "../constants";
 
 class BoardOptions extends Component {
   handleInputChange = event => {
